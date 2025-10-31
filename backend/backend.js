@@ -1,13 +1,25 @@
 const express = require('express');
+const path = require('path');
+const PORT = 3000;
 
 const app = express();
+
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
+
+app.use(express.static(path.join(__dirname, '../frontend/public')));
 
 // esto es para que la aplicacion pueda convertir los jsons en objetos utilizales
 app.use(express.json());
 
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/public/api.html'));
+});
+
 app.post("/conversion", async (req, res) => {
 
-    const {base, moneda} = req.body;
+    const {base, monedaCambio} = req.body;
 
     try{
 
@@ -31,13 +43,13 @@ app.post("/conversion", async (req, res) => {
 
         //se imprime las currencys para saber su contenido
 
-        const resultado = data.conversion_rates[moneda];
+        const resultado = data.conversion_rates[monedaCambio];
 
         res.json({
             base,
-            moneda,
+            monedaCambio,
             resultado,
-            mensaje: `1 ${base} equivale a ${resultado} ${moneda}`
+            mensaje: `1 ${base} equivale a ${resultado} ${monedaCambio}`
         });
 
         
