@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "node backend/backend.js",
     "start": "nodemon backend/backend.js"
   },
   "keywords": [],
@@ -12,7 +13,7 @@
   "type": "commonjs",
   "dependencies": {
     "express": "^5.1.0",
-    "nodemon": "^3.1.10",
+    "nodemon": "^3.1.11",
     "path": "^0.12.7"
   }
 }
